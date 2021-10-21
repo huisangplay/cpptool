@@ -1,10 +1,12 @@
-﻿#include <iostream>
+﻿#pragma warning(disable:4996)
+#include <iostream>
 #include "libxl.h"
 #include <vector>
 #include<map>
 #include<filesystem>
 #include<string>
 #include<fstream>
+#include<codecvt>
 using namespace libxl;
 using namespace std;
 namespace fs = std::filesystem;
@@ -13,6 +15,7 @@ void search_excel(wstring file, wstring findstr, Book* book, vector<wstring>& ou
 void search_excel_xls(vector<wstring> files, wstring findstr, vector<wstring>& output_filepaths);
 void search_excel_xlsx(vector<wstring> files, wstring findstr, vector<wstring>& output_filepaths);
 void search_text(wstring file_path, wstring findstr, vector<wstring>& output_filepaths);
+void search_xml(wstring file_path, wstring findstr, vector<wstring>& output_filepaths);
 void setLibxlKey(Book* book);
 int main() {
 	//设置语言区域为中国，wcout可显示中文
@@ -55,9 +58,14 @@ int main() {
 		else if (filetype == L".xlsx" && filepaths.size() != 0) {
 			search_excel_xlsx(filepaths, findstr, output_filepaths);
 		}
-		else if ((filetype == L".xml" || filetype == L".ini" || filetype == L".csv") && filepaths.size() != 0) {
+		else if ((filetype == L".ini" || filetype == L".csv") && filepaths.size() != 0) {
 			for (auto filepath : filepaths) {
 				search_text(filepath, findstr, output_filepaths);
+			}
+		}
+		else if (filetype == L".xml"&&filepaths.size() != 0) {
+			for (auto filepath : filepaths) {
+				search_xml(filepath, findstr, output_filepaths);
 			}
 		}
 		iter++;
@@ -145,6 +153,7 @@ void search_text(wstring filepath, wstring findstr, vector<wstring>& output_file
 		while (getline(file_text, linestr))
 		{
 			wcout << linestr <<endl;
+			const wstring temp = linestr;
 			if (linestr.find(findstr, 0) != wstring::npos) {
 				output_filepaths.push_back(filepath);
 				break;
@@ -157,4 +166,27 @@ void search_text(wstring filepath, wstring findstr, vector<wstring>& output_file
 }
 void setLibxlKey(Book* book) {
 	book->setKey(L"zhouhui", L"windows-2b212a0206cfe00365b6686dafpar7g1");
+}
+void search_xml(wstring filepath, wstring findstr, vector<wstring>& output_filepaths) {
+	wifstream file_text(filepath, ios::binary);
+	//file_text.imbue(locale(locale::empty(),new codecvt_utf8<wchar_t>));
+	file_text.imbue(locale("chs"));
+	std::codecvt_utf8<wchar_t, 0x10ffff, std::consume_header>* codecvtToUnicode = new std::codecvt_utf8 < wchar_t, 0x10ffff, std::consume_header >;
+	if (file_text.is_open())
+	{
+		file_text.imbue(std::locale(file_text.getloc(), codecvtToUnicode));
+		std::wstring linestr;
+
+		while (getline(file_text, linestr))
+		{
+			wcout << linestr << endl;
+			if (linestr.find(findstr, 0) != wstring::npos) {
+				output_filepaths.push_back(filepath);
+				break;
+			}
+		}
+		file_text.close();
+	}
+	else
+		wcout << L"Unable to open file:" << filepath << endl;
 }
