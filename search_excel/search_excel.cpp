@@ -168,24 +168,20 @@ void setLibxlKey(Book* book) {
 	book->setKey(L"zhouhui", L"windows-2b212a0206cfe00365b6686dafpar7g1");
 }
 void search_xml(wstring filepath, wstring findstr, vector<wstring>& output_filepaths) {
-	wifstream file_text(filepath, ios::binary);
-	//file_text.imbue(locale(locale::empty(),new codecvt_utf8<wchar_t>));
-	file_text.imbue(locale("chs"));
-	std::codecvt_utf8<wchar_t, 0x10ffff, std::consume_header>* codecvtToUnicode = new std::codecvt_utf8 < wchar_t, 0x10ffff, std::consume_header >;
-	if (file_text.is_open())
+	wifstream wif(filepath, ios::binary);
+	wif.imbue(locale(locale::empty(),new codecvt_utf8<wchar_t>));
+	if (wif.is_open())
 	{
-		file_text.imbue(std::locale(file_text.getloc(), codecvtToUnicode));
 		std::wstring linestr;
-
-		while (getline(file_text, linestr))
+		while (getline(wif, linestr))
 		{
-			wcout << linestr << endl;
+			
 			if (linestr.find(findstr, 0) != wstring::npos) {
 				output_filepaths.push_back(filepath);
 				break;
 			}
 		}
-		file_text.close();
+		wif.close();
 	}
 	else
 		wcout << L"Unable to open file:" << filepath << endl;
