@@ -13,5 +13,6 @@ add_executable(imgui main.cpp
         imgui/imgui_tables.cpp
         imgui/imgui_widgets.cpp
         utils/stringutil.cpp
-        utils/windowsutil.cpp)
+        utils/windowsutil.cpp
+        utils/json.hpp)
 target_link_libraries(imgui glfw3dll.lib OpenGL32.Lib)
