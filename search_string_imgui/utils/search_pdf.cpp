@@ -23,8 +23,8 @@ bool search_pdf(std::string filepath, std::string findstr)
             PdfPage* pPage = document.GetPage( i );
             content_string+=extractor.ExtractText( &document, pPage );
             string_replace(content_string,"\n","");
+            if(content_string.find(findstr)!=string::npos) return true;
         }
-        if(content_string.find(findstr)!=string::npos) return true;
 
     } catch( PdfError & e ) {
         return false;
