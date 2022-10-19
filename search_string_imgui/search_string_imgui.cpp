@@ -42,7 +42,7 @@ string showmessage = "";
 int main(int, char **) {
 
     freopen("nul", "w", stderr);
-    cout << UTF8_2_GBK(u8"开始读取 conf/filetypes.json 配置文件...") << endl;
+    cout << UTF8_2_GBK(u8"开始读取 conf/search_string_conf.json 配置文件...") << endl;
     cout << UTF8_2_GBK(u8"支持文本类型数据类型:") << endl;
     ifstream jsonfile("conf/search_string_conf.json");
     json configJson = json::parse(jsonfile);
@@ -133,7 +133,7 @@ int main(int, char **) {
             ImGui::PushItemWidth(500);
 
             ImGui::TextWrapped(
-                    u8"本程序为在指定文件夹搜索指定字符串\n如需添加其他文本数据类型,请在conf/filetypes.json中配置\n查询多个字符串时,请用';'分隔,搜索结果保存在search_result.txt文件中\n");
+                    u8"本程序为在指定文件夹搜索指定字符串\n如需添加其他文本数据类型,请在conf/search_string_conf.json中配置\n查询多个字符串时,请用';'分隔,搜索结果保存在out/search_result.csv文件中\n");
             ImGui::TextWrapped(
                     u8"请选择要搜索的数据类型:");
 
@@ -200,7 +200,7 @@ int main(int, char **) {
             if (output_filepaths.size() > 0) {
 
                 for (auto output_filepath: output_filepaths) {
-                    if (ImGui::Button(GBK_2_UTF8(output_filepath).c_str())) {
+                    if (ImGui::SmallButton(GBK_2_UTF8(output_filepath).c_str())) {
                         string cmd_string = "explorer /select," + output_filepath;
                         system(cmd_string.c_str());
                     }
@@ -257,7 +257,7 @@ void search_string_by_thread() {
     }
     search_strs_main(search_path, UTF8_2_GBK(search_string), filetypes, output_filepaths);
     ofstream ofs;
-    string filename = "search_result.txt";
+    string filename = "out/search_result.csv";
     ofs.open(filename, ios::out);
     for (auto output_tempfilepath: output_filepaths) {
         ofs << output_tempfilepath << endl;
