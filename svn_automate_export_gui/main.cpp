@@ -1,4 +1,4 @@
-ï»¿#include<iostream>
+#include<iostream>
 #include<thread>
 #include "imgui/imgui.h"
 #include "backends/imgui_impl_glfw.h"
@@ -57,16 +57,16 @@ static string cpc_git_path;
 int main(int, char **) {
     //SetConsoleOutputCP(CP_UTF8);
     // Setup window
-    cout << UTF8_2_GBK(u8"å¼€å§‹è¯»å– conf/svn_export.json é…ç½®æ–‡ä»¶...") << endl;
+    cout << UTF8_2_GBK(u8"¿ªÊ¼¶ÁÈ¡ conf/svn_export.json ÅäÖÃÎÄ¼þ...") << endl;
 
     ifstream jsonfile("conf/svn_export.json");
     json configJson = json::parse(jsonfile);
 
     ideal_git_path = configJson["ideal_git_path"];
-    cout << UTF8_2_GBK(u8"ideal gitæ–‡ä»¶å¤¹è·¯å¾„ä¸º:" + ideal_git_path) << endl;
+    cout << UTF8_2_GBK(u8"ideal gitÎÄ¼þ¼ÐÂ·¾¶Îª:" + ideal_git_path) << endl;
 
     cpc_git_path = configJson["cpc_git_path"];
-    cout << UTF8_2_GBK(u8"cpc gitæ–‡ä»¶å¤¹è·¯å¾„ä¸º:" + cpc_git_path) << endl;
+    cout << UTF8_2_GBK(u8"cpc gitÎÄ¼þ¼ÐÂ·¾¶Îª:" + cpc_git_path) << endl;
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -137,116 +137,118 @@ int main(int, char **) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        //--------------ä¸»è¦é¡µé¢é€»è¾‘
+        //--------------Ö÷ÒªÒ³ÃæÂß¼­
         //  Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
-            ImGui::Begin(u8"svnè‡ªåŠ¨å¯¼å‡ºå·¥å…·");
+            ImGui::Begin(u8"svn×Ô¶¯µ¼³ö¹¤¾ß");
             ImGui::PushItemWidth(500);
 
             ImGui::InputTextMultiline(
-                    u8"è¯·è¾“å…¥è¦ä¸‹è½½çš„svnç‰ˆæœ¬å·ï¼Œä»¥ç©ºæ ¼éš”å¼€ï¼Œè‡ªåŠ¨æŽ’åº...\nå¯¼å‡ºæ–‡ä»¶å¤¹å‘½åæ–¹å¼-å½“å‰å¹´æœˆæ—¥_æŽ’åºåŽç¬¬ä¸€ä¸ªsvnå·\né¦–æ¬¡ä½¿ç”¨éœ€è¦é…ç½®æœ¬åœ°é¡¹ç›®gitæ–‡ä»¶å¤¹,è¯·åœ¨conf\\svn_export.jsonæ–‡ä»¶ä¸­è¿›è¡Œé…ç½®",
+                    u8"ÇëÊäÈëÒªÏÂÔØµÄsvn°æ±¾ºÅ£¬ÒÔ¿Õ¸ñ¸ô¿ª£¬×Ô¶¯ÅÅÐò...\nµ¼³öÎÄ¼þ¼ÐÃüÃû·½Ê½-µ±Ç°ÄêÔÂÈÕ_ÅÅÐòºóµÚÒ»¸ösvnºÅ\nÊ×´ÎÊ¹ÓÃÐèÒªÅäÖÃ±¾µØÏîÄ¿gitÎÄ¼þ¼Ð,ÇëÔÚconf\\svn_export.jsonÎÄ¼þÖÐ½øÐÐÅäÖÃ",
                     svn_string, IM_ARRAYSIZE(svn_string));
 
-            if (ImGui::Button(u8"é€‰æ‹©å¯¼å‡ºä½ç½®")) {
+            if (ImGui::Button(u8"Ñ¡Ôñµ¼³öÎ»ÖÃ")) {
                 export_path = OnSigBtnSelectInstallDir();
             }
             ImGui::SameLine();
             ImGui::Text(GBK_2_UTF8(export_path).c_str());
 
-            if (ImGui::Button(u8"idealå¯¼å‡º")) {
+            if (ImGui::Button(u8"idealµ¼³ö")) {
                 uploadmessage = "";
                 endflag = false;
                 exportfiles.clear();
-                showmessage = u8"ideal svnæ–‡ä»¶å¯¼å‡ºä¸­...\n";
-                //åˆ›å»ºä¸€ä¸ªçº¿ç¨‹åŽ»å®Œæˆè®¡ç®—åŠ¨ä½œ
+                showmessage = u8"ideal svnÎÄ¼þµ¼³öÖÐ...\n";
+                //´´½¨Ò»¸öÏß³ÌÈ¥Íê³É¼ÆËã¶¯×÷
                 thread mythread(ideal_export);
-                //ä¸»çº¿ç¨‹å­çº¿ç¨‹åˆ†ç¦»
+                //Ö÷Ïß³Ì×ÓÏß³Ì·ÖÀë
                 mythread.detach();
             }
             ImGui::SameLine();
-            if (ImGui::Button(u8"cpcå¯¼å‡º")) {
+            if (ImGui::Button(u8"cpcµ¼³ö")) {
                 uploadmessage = "";
                 endflag = false;
                 exportfiles.clear();
-                showmessage = u8"cpc svnæ–‡ä»¶å¯¼å‡ºä¸­...\n";
-                //åˆ›å»ºä¸€ä¸ªçº¿ç¨‹åŽ»å®Œæˆè®¡ç®—åŠ¨ä½œ
+                showmessage = u8"cpc svnÎÄ¼þµ¼³öÖÐ...\n";
+                //´´½¨Ò»¸öÏß³ÌÈ¥Íê³É¼ÆËã¶¯×÷
                 thread mythread(cpc_export);
-                //ä¸»çº¿ç¨‹å­çº¿ç¨‹åˆ†ç¦»
+                //Ö÷Ïß³Ì×ÓÏß³Ì·ÖÀë
                 mythread.detach();
             }
 
-            if (ImGui::Button(u8"idealä¸´æ—¶æ–‡ä»¶æ£€æŸ¥")) {
-                string copystring;
-                for(int svn_num:svn_nums) copystring=copystring+to_string(svn_num)+" ";
-                copystring+="\n";
-                copystring+= vec_to_string(exportfiles);
-                CopyToClipboard(copystring.c_str(),copystring.size());
-                showmessage+=u8"ä¸´æ—¶æ–‡ä»¶æ£€æŸ¥æ‰€éœ€ä¿¡æ¯å·²å¤åˆ¶è‡³ç²˜è´´æ¿.";
-                system("start chrome.exe http://10.11.49.173:8080/index");
-            }
-            ImGui::SameLine();
-            if (ImGui::Button(u8"cpcä¸´æ—¶æ–‡ä»¶æ£€æŸ¥")) {
-                string copystring;
-                for(int svn_num:svn_nums) copystring=copystring+to_string(svn_num)+" ";
-                copystring+="\n";
-                copystring+= vec_to_string(exportfiles);
-                CopyToClipboard(copystring.c_str(),copystring.size());
-                showmessage+=u8"ä¸´æ—¶æ–‡ä»¶æ£€æŸ¥æ‰€éœ€ä¿¡æ¯å·²å¤åˆ¶è‡³ç²˜è´´æ¿.";
-                system("start chrome.exe http://10.11.49.173:8088/index");
-            }
-            ImGui::SameLine();
-            ImGui::Text(u8"ç‚¹å‡»ä¸´æ—¶æ–‡ä»¶æ£€æŸ¥ä¼šè‡ªåŠ¨å¤åˆ¶svnå·åŠæ–‡ä»¶åˆ—è¡¨");
             ImGui::Text(showmessage.c_str());
 
             if (endflag) {
-                strcpy(showchararray, showfiles.c_str());
-                ImGui::InputTextMultiline(u8"å¯¼å‡ºæ–‡ä»¶åˆ—è¡¨", showchararray, IM_ARRAYSIZE(showchararray));
-                ImGui::SameLine();
-                if (ImGui::Button(u8"æ‰“å¼€æ–‡ä»¶ä½ç½®")) {
-                    string cmd_string = "explorer /e," + submit_path;
-                    system(cmd_string.c_str());
-                }
+
                 if (submit_path.find("ideal") != string::npos) {
+                    if (ImGui::Button(u8"idealÁÙÊ±ÎÄ¼þ¼ì²é")) {
+                        string copystring;
+                        for(int svn_num:svn_nums) copystring+=to_string(svn_num)+" ";
+                        copystring+="\n";
+                        copystring+= vec_to_string(exportfiles);
+                        CopyToClipboard(copystring.c_str());
+                        showmessage+=u8"ÁÙÊ±ÎÄ¼þ¼ì²éËùÐèÐÅÏ¢ÒÑ¸´ÖÆÖÁÕ³Ìù°å.";
+                        system("start chrome.exe http://10.11.49.173:8080/index");
+                    }
                     ImGui::SameLine();
-                    if (ImGui::Button(u8"ä¸Šä¼ ideal 30 31 32 æœåŠ¡å™¨")) {
+                    ImGui::Text(u8"µã»÷ÁÙÊ±ÎÄ¼þ¼ì²é»á×Ô¶¯¸´ÖÆsvnºÅ¼°ÎÄ¼þÁÐ±í");
+
+                    ImGui::Text(u8"\nµ¼³öidealÎÄ¼þÁÐ±í");
+                    strcpy(showchararray, showfiles.c_str());
+                    ImGui::InputTextMultiline(u8" ", showchararray, IM_ARRAYSIZE(showchararray));
+                    ImGui::SameLine();
+                    if (ImGui::Button(u8"´ò¿ªÎÄ¼þÎ»ÖÃ")) {
+                        string cmd_string = "explorer /e," + submit_path;
+                        system(cmd_string.c_str());
+                    }
+
+                    ImGui::SameLine();
+                    if (ImGui::Button(u8"ÉÏ´«ideal 30 31 32 ·þÎñÆ÷")) {
                         ideal_upload_30_31_32();
                     }
                     ImGui::SameLine();
-                    if (ImGui::Button(u8"åŒæ­¥ideal git")) {
+                    if (ImGui::Button(u8"Í¬²½ideal git")) {
                         string cmdstr = "TortoiseGitProc /path:\"" + ideal_git_path + "\"     /command:pull";
                         system(cmdstr.c_str());
-                        cmdstr = " xcopy /QEY " + submit_path + UTF8_2_GBK(u8"\\é¡¹ç›®ä»£ç  " + ideal_git_path);
+                        cmdstr = " xcopy /QEY " + submit_path + UTF8_2_GBK(u8"\\ÏîÄ¿´úÂë " + ideal_git_path);
                         system(cmdstr.c_str());
                         cmdstr = "TortoiseGitProc /path:\"" + ideal_git_path + "\"     /command:commit -a";
                         system(cmdstr.c_str());
-//                    string git_submit_message;
-//                    for(int svn_num:svn_nums){
-//                        cmdstr="svn log http://vcs.comac.intra/svn/sadri/é¡¹ç›®ä»£ç  -r"+to_string(svn_num)+" --incremental";
-//                        git_submit_message+=cmdProcess(cmdstr.c_str());
-//                    }
-//                    cout<<git_submit_message<<endl;
 
                     }
                 }
                 if (submit_path.find("cpc") != string::npos) {
+                    if (ImGui::Button(u8"cpcÁÙÊ±ÎÄ¼þ¼ì²é")) {
+                        string copystring;
+                        for(int svn_num:svn_nums) copystring+=to_string(svn_num)+" ";
+                        copystring+="\n";
+                        copystring+= vec_to_string(exportfiles);
+                        CopyToClipboard(copystring.c_str());
+                        showmessage+=u8"ÁÙÊ±ÎÄ¼þ¼ì²éËùÐèÐÅÏ¢ÒÑ¸´ÖÆÖÁÕ³Ìù°å.";
+                        system("start chrome.exe http://10.11.49.173:8088/index");
+                    }
                     ImGui::SameLine();
-                    if (ImGui::Button(u8"ä¸Šä¼ cpc 10 11 12 æœåŠ¡å™¨")) {
+                    ImGui::Text(u8"µã»÷ÁÙÊ±ÎÄ¼þ¼ì²é»á×Ô¶¯¸´ÖÆsvnºÅ¼°ÎÄ¼þÁÐ±í");
+
+                    ImGui::Text(u8"\nµ¼³öcpcÎÄ¼þÁÐ±í");
+                    strcpy(showchararray, showfiles.c_str());
+                    ImGui::InputTextMultiline(u8" ", showchararray, IM_ARRAYSIZE(showchararray));
+                    ImGui::SameLine();
+                    if (ImGui::Button(u8"´ò¿ªÎÄ¼þÎ»ÖÃ")) {
+                        string cmd_string = "explorer /e," + submit_path;
+                        system(cmd_string.c_str());
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button(u8"ÉÏ´«cpc 10 11 12 ·þÎñÆ÷")) {
                         cpc_upload_10_11_12();
                     }
                     ImGui::SameLine();
-                    if (ImGui::Button(u8"åŒæ­¥cpc git")) {
+                    if (ImGui::Button(u8"Í¬²½cpc git")) {
                         string cmdstr = "TortoiseGitProc /path:\"" + cpc_git_path + "\"     /command:pull";
                         system(cmdstr.c_str());
                         cmdstr = " xcopy /QEY " + submit_path + UTF8_2_GBK(u8"\\trunk\\code " + cpc_git_path);
                         system(cmdstr.c_str());
                         cmdstr = "TortoiseGitProc /path:\"" + cpc_git_path + "\"     /command:commit -a";
                         system(cmdstr.c_str());
-//                    string git_submit_message;
-//                    for(int svn_num:svn_nums){
-//                        cmdstr="svn log http://vcs.comac.intra/svn/sadri/é¡¹ç›®ä»£ç  -r"+to_string(svn_num)+" --incremental";
-//                        git_submit_message+=cmdProcess(cmdstr.c_str());
-//                    }
-//                    cout<<git_submit_message<<endl;
 
                     }
                 }
@@ -256,7 +258,7 @@ int main(int, char **) {
 
             ImGui::End();
         }
-        //--------------ä¸»è¦é¡µé¢é€»è¾‘
+        //--------------Ö÷ÒªÒ³ÃæÂß¼­
 
         // Rendering
         ImGui::Render();
@@ -292,11 +294,11 @@ int main(int, char **) {
 void ideal_export() {
 
     if (remove_surplus_spaces(svn_string).size() == 0) {
-        showmessage = u8"è¯·è¾“å…¥éœ€è¦å¯¼å‡ºçš„svnå·...";
+        showmessage = u8"ÇëÊäÈëÐèÒªµ¼³öµÄsvnºÅ...";
         return;
     }
     if (export_path == "null") {
-        showmessage = u8"è¯·é€‰æ‹©å¯¼å‡ºçš„æ–‡ä»¶å¤¹...";
+        showmessage = u8"ÇëÑ¡Ôñµ¼³öµÄÎÄ¼þ¼Ð...";
         return;
     }
     svn_nums.clear();
@@ -304,7 +306,7 @@ void ideal_export() {
 
     submit_path = export_path + "\\ideal_" + getCurrentYearMonthDayString() + "_svn" + to_string(svn_nums[0]);
 
-    showmessage = showmessage + u8"å¯¼å‡ºæ–‡ä»¶ä½ç½®:" + submit_path + "\n";
+    showmessage = showmessage + u8"µ¼³öÎÄ¼þÎ»ÖÃ:" + submit_path + "\n";
     ideal_svn_export(svn_nums, submit_path, exportfiles);
     endflag = true;
     showfiles = GBK_2_UTF8(vec_to_string(exportfiles));
@@ -312,11 +314,11 @@ void ideal_export() {
 
 void cpc_export() {
     if (remove_surplus_spaces(svn_string).size() == 0) {
-        showmessage = u8"è¯·è¾“å…¥éœ€è¦å¯¼å‡ºçš„svnå·...";
+        showmessage = u8"ÇëÊäÈëÐèÒªµ¼³öµÄsvnºÅ...";
         return;
     }
     if (export_path == "null") {
-        showmessage = u8"è¯·é€‰æ‹©å¯¼å‡ºçš„æ–‡ä»¶å¤¹...";
+        showmessage = u8"ÇëÑ¡Ôñµ¼³öµÄÎÄ¼þ¼Ð...";
         return;
     }
     svn_nums.clear();
@@ -324,7 +326,7 @@ void cpc_export() {
 
     submit_path = export_path + "\\cpc_" + getCurrentYearMonthDayString() + "_svn" + to_string(svn_nums[0]);
 
-    showmessage = showmessage + u8"å¯¼å‡ºæ–‡ä»¶ä½ç½®:" + submit_path + "\n";
+    showmessage = showmessage + u8"µ¼³öÎÄ¼þÎ»ÖÃ:" + submit_path + "\n";
     cpc_svn_export(svn_nums, submit_path, exportfiles);
     endflag = true;
     showfiles = GBK_2_UTF8(vec_to_string(exportfiles));
@@ -345,8 +347,8 @@ void svn_split(string svnline) {
         svn_nums.push_back(atoi(svn_strs.at(i).c_str()));
     }
     sort(svn_nums.begin(), svn_nums.end());
-    showmessage = showmessage + u8"svnç‰ˆæœ¬å·æ•°é‡ï¼š" + to_string(svn_nums.size()) + "\n";
-    showmessage = showmessage + u8"æŽ’åºåŽçš„ç‰ˆæœ¬:";
+    showmessage = showmessage + u8"svn°æ±¾ºÅÊýÁ¿£º" + to_string(svn_nums.size()) + "\n";
+    showmessage = showmessage + u8"ÅÅÐòºóµÄ°æ±¾:";
     for (int svn_num: svn_nums) {
         showmessage = showmessage + to_string(svn_num) + " ";
     }
@@ -361,7 +363,7 @@ void ideal_upload_30_31_32() {
     ips.push_back("10.11.13.32");
 
     for (auto ip: ips) {
-        uploadmessage += u8"\nä¸Šä¼ " + ip + u8"æœåŠ¡å™¨ä¸­...";
+        uploadmessage += u8"\nÉÏ´«" + ip + u8"·þÎñÆ÷ÖÐ...";
         embeddedmz::CFTPClient FTPClient([](const std::string &strLogMsg) { std::cout << strLogMsg << endl; });
         FTPClient.InitSession(ip, 21, "windch", "ide2012w");
         for (auto exportfile: exportfiles) {
@@ -370,12 +372,12 @@ void ideal_upload_30_31_32() {
             string serverpath = "/ptc/Windchill/ideal" + exportfile.substr(9);
             //FTPClient.UploadFile(submit_path+exportfile, "/ptc/Windchill/ideal"+exportfile.substr(8));
             if (!FTPClient.UploadFile(GBK_2_UTF8(localpath), GBK_2_UTF8(serverpath),true)) {
-                uploadmessage += u8"\nä¸Šä¼ " + ip + u8"æœåŠ¡å™¨å¤±è´¥...è¯·é‡æ–°ä¸Šä¼ ";
+                uploadmessage += u8"\nÉÏ´«" + ip + u8"·þÎñÆ÷Ê§°Ü...ÇëÖØÐÂÉÏ´«";
                 return;
             }
         }
     }
-    uploadmessage += u8"ä¸Šä¼ å®Œæˆ";
+    uploadmessage += u8"ÉÏ´«Íê³É";
 }
 
 void cpc_upload_10_11_12() {
@@ -386,7 +388,7 @@ void cpc_upload_10_11_12() {
     ips.push_back("10.11.13.12");
 
     for (auto ip: ips) {
-        uploadmessage += u8"\nä¸Šä¼ " + ip + u8"æœåŠ¡å™¨ä¸­...";
+        uploadmessage += u8"\nÉÏ´«" + ip + u8"·þÎñÆ÷ÖÐ...";
         embeddedmz::CFTPClient FTPClient([](const std::string &strLogMsg) { std::cout << strLogMsg << endl; });
         FTPClient.InitSession(ip, 21, "windch", "cpc0318w");
         for (auto exportfile: exportfiles) {
@@ -396,10 +398,10 @@ void cpc_upload_10_11_12() {
             //FTPClient.UploadFile(submit_path+exportfile, "/ptc/Windchill/ideal"+exportfile.substr(8));
             cout<<"server path:"<<serverpath<<endl;
             if (!FTPClient.UploadFile(GBK_2_UTF8(localpath), GBK_2_UTF8(serverpath),true)) {
-                uploadmessage += u8"\nä¸Šä¼ " + ip + u8"æœåŠ¡å™¨å¤±è´¥...è¯·é‡æ–°ä¸Šä¼ ";
+                uploadmessage += u8"\nÉÏ´«" + ip + u8"·þÎñÆ÷Ê§°Ü...ÇëÖØÐÂÉÏ´«";
                 return;
             }
         }
     }
-    uploadmessage += u8"ä¸Šä¼ å®Œæˆ";
+    uploadmessage += u8"ÉÏ´«Íê³É";
 }

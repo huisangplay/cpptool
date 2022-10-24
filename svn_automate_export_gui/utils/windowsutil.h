@@ -15,6 +15,7 @@
 #include <sstream>
 #include <shlobj.h>
 #include<ctime>
+#include<atlstr.h>
 using namespace std;
 string OnSigBtnSelectInstallDir();
 void getAllFiles(string path, vector<string> &files);
@@ -23,3 +24,4 @@ string cmdProcess(const char *cmd);
 bool createDirectory(const std::string folder);
 string getCurrentYearMonthDayString();
 BOOL CopyToClipboard(const char* pszData, const int nDataLen);
+BOOL CopyToClipboard(CString source) ;

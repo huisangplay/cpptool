@@ -4,43 +4,43 @@
 
 #include <vector>
 #include "windowsutil.h"
-string OnSigBtnSelectInstallDir()
-{
+
+string OnSigBtnSelectInstallDir() {
     BROWSEINFO bi;
     bi.hwndOwner = NULL;
-    bi.pidlRoot = CSIDL_DESKTOP;//æ–‡ä»¶å¤¹çš„æ ¹ç›®å½•ï¼Œæ­¤å¤„ä¸ºæ¡Œé¢
+    bi.pidlRoot = CSIDL_DESKTOP;//ÎÄ¼ş¼ĞµÄ¸ùÄ¿Â¼£¬´Ë´¦Îª×ÀÃæ
     bi.pszDisplayName = NULL;
-    bi.lpszTitle = NULL;//æ˜¾ç¤ºä½äºå¯¹è¯æ¡†å·¦ä¸Šéƒ¨çš„æç¤ºä¿¡æ¯
-    bi.ulFlags = BIF_DONTGOBELOWDOMAIN | BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE;//æœ‰æ–°å»ºæ–‡ä»¶å¤¹æŒ‰é’®
+    bi.lpszTitle = NULL;//ÏÔÊ¾Î»ÓÚ¶Ô»°¿ò×óÉÏ²¿µÄÌáÊ¾ĞÅÏ¢
+    bi.ulFlags = BIF_DONTGOBELOWDOMAIN | BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE;//ÓĞĞÂ½¨ÎÄ¼ş¼Ğ°´Å¥
     bi.lpfn = NULL;
     bi.iImage = 0;
-    LPITEMIDLIST pidl = SHBrowseForFolder(&bi);//è°ƒç”¨é€‰æ‹©å¯¹è¯æ¡†
-    if (pidl == NULL)
-    {
+    LPITEMIDLIST pidl = SHBrowseForFolder(&bi);//µ÷ÓÃÑ¡Ôñ¶Ô»°¿ò
+    if (pidl == NULL) {
         return "null";
     }
     TCHAR strFolder[MAX_PATH];
     SHGetPathFromIDList(pidl, strFolder);
     return strFolder;
 }
-void getAllFiles(string path, vector<string> &files) {
-    //æ–‡ä»¶å¥æŸ„
+
+void getAllFiles(string path, vector <string> &files) {
+    //ÎÄ¼ş¾ä±ú
     long hFile = 0;
-    //æ–‡ä»¶ä¿¡æ¯
-    struct _finddata_t fileinfo; //å¾ˆå°‘ç”¨çš„æ–‡ä»¶ä¿¡æ¯è¯»å–ç»“æ„
-    string p; //stringç±»å¾ˆæœ‰æ„æ€çš„ä¸€ä¸ªèµ‹å€¼å‡½æ•°:assign()ï¼Œæœ‰å¾ˆå¤šé‡è½½ç‰ˆæœ¬
+    //ÎÄ¼şĞÅÏ¢
+    struct _finddata_t fileinfo; //ºÜÉÙÓÃµÄÎÄ¼şĞÅÏ¢¶ÁÈ¡½á¹¹
+    string p; //stringÀàºÜÓĞÒâË¼µÄÒ»¸ö¸³Öµº¯Êı:assign()£¬ÓĞºÜ¶àÖØÔØ°æ±¾
     if ((hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1) {
         do {
-            if ((fileinfo.attrib & _A_SUBDIR)) //åˆ¤æ–­æ˜¯å¦ä¸ºæ–‡ä»¶å¤¹
+            if ((fileinfo.attrib & _A_SUBDIR)) //ÅĞ¶ÏÊÇ·ñÎªÎÄ¼ş¼Ğ
             {
                 if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0) {
-                    getAllFiles(p.assign(path).append("/").append(fileinfo.name), files);//é€’å½’å½“å‰æ–‡ä»¶å¤¹
+                    getAllFiles(p.assign(path).append("/").append(fileinfo.name), files);//µİ¹éµ±Ç°ÎÄ¼ş¼Ğ
                 }
-            } else  //æ–‡ä»¶å¤„ç†
+            } else  //ÎÄ¼ş´¦Àí
             {
-                files.push_back(p.assign(path).append("/").append(fileinfo.name));//æ–‡ä»¶å
+                files.push_back(p.assign(path).append("/").append(fileinfo.name));//ÎÄ¼şÃû
             }
-        } while (_findnext(hFile, &fileinfo) == 0); //å¯»æ‰¾ä¸‹ä¸€ä¸ªï¼ŒæˆåŠŸè¿”å›0ï¼Œå¦åˆ™-1
+        } while (_findnext(hFile, &fileinfo) == 0); //Ñ°ÕÒÏÂÒ»¸ö£¬³É¹¦·µ»Ø0£¬·ñÔò-1
         _findclose(hFile);
     }
 }
@@ -50,6 +50,7 @@ string checkPathType(string path) {
                      "\\nul ( @echo FOLDER) else ( @echo FILE)";
     return cmdProcess(typecmd.c_str());
 }
+
 string cmdProcess(const char *cmd) {
     array<char, 128> buffer;
     string result;
@@ -62,8 +63,9 @@ string cmdProcess(const char *cmd) {
     }
     return result;
 }
-vector<string> split(const string &s, char delimiter) {
-    vector<string> tokens;
+
+vector <string> split(const string &s, char delimiter) {
+    vector <string> tokens;
     string token;
     istringstream tokenStream(s);
     while (getline(tokenStream, token, delimiter)) {
@@ -93,26 +95,52 @@ bool createDirectory(const std::string folder) {
     }
     return true;
 }
-string getCurrentYearMonthDayString(){
+
+string getCurrentYearMonthDayString() {
     time_t curtime;
     time(&curtime);
-    tm* nowtime=localtime(&curtime);
-    string year= to_string(1900+nowtime->tm_year);
-    string month= to_string(1+nowtime->tm_mon);
-    string day= to_string(nowtime->tm_mday);
-    return year+month+day;
+    tm *nowtime = localtime(&curtime);
+    string year = to_string(1900 + nowtime->tm_year);
+    string month = to_string(1 + nowtime->tm_mon);
+    string day = to_string(nowtime->tm_mday);
+    return year + month + day;
 }
 
-BOOL CopyToClipboard(const char* pszData, const int nDataLen) {
+BOOL CopyToClipboard(const char *pszData, const int nDataLen) {
     if (::OpenClipboard(NULL)) {
         ::EmptyClipboard();
         HGLOBAL clipbuffer;
-        char* buffer;
+        char *buffer;
         clipbuffer = ::GlobalAlloc(GMEM_DDESHARE, nDataLen + 1);
-        buffer = (char*)::GlobalLock(clipbuffer);
+        buffer = (char *) ::GlobalLock(clipbuffer);
         strcpy(buffer, pszData);
         ::GlobalUnlock(clipbuffer);
-        ::SetClipboardData(CF_TEXT,clipbuffer);
+        ::SetClipboardData(CF_TEXT, clipbuffer);
+        ::CloseClipboard();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+BOOL CopyToClipboard(CString source) {
+    if (OpenClipboard(NULL)) {
+        //·ÀÖ¹·ÇASCIIÓïÑÔ¸´ÖÆµ½¼ôÇĞ°åÎªÂÒÂë
+        int buff_size = source.GetLength();
+        CStringW strWide = CStringW(source);
+        int nLen = strWide.GetLength();
+        //½«¼ôÇĞ°åÖÃ¿Õ
+        ::EmptyClipboard();
+        HANDLE clipbuffer = ::GlobalAlloc(GMEM_DDESHARE, (nLen + 1) * 2);
+        if (!clipbuffer) {
+            ::CloseClipboard();
+            return FALSE;
+        }
+        char *buffer = (char *) ::GlobalLock(clipbuffer);
+        memset(buffer, 0, (nLen + 1) * 2);
+        memcpy_s(buffer, nLen * 2, strWide.GetBuffer(0), nLen * 2);
+        strWide.ReleaseBuffer();
+        ::GlobalUnlock(clipbuffer);
+        ::SetClipboardData(CF_UNICODETEXT, clipbuffer);
         ::CloseClipboard();
         return TRUE;
     }
