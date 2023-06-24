@@ -1,0 +1,5 @@
+{
+    "name":"sqlite3",
+    "rdbms": "sqlite3",
+    "filename": "usersupport.db"
+}

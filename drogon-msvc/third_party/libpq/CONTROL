@@ -1,0 +1,29 @@
+Package: libpq
+Version: 15.3
+Depends: vcpkg-cmake-get-vars:x64-windows, vcpkg-pkgconfig-get-modules:x64-windows
+Architecture: x64-windows-static
+Multi-Arch: same
+Abi: 85da54c5bd545d1d2b1c7d91b3d4b5e1220d10c970d001ac99a7e0ea928ed349
+Description: The official database access API of postgresql
+Default-Features: lz4, openssl, zlib
+
+Package: libpq
+Feature: lz4
+Depends: lz4
+Architecture: x64-windows-static
+Multi-Arch: same
+Description: Use lz4
+
+Package: libpq
+Feature: openssl
+Depends: openssl
+Architecture: x64-windows-static
+Multi-Arch: same
+Description: support for encrypted client connections and random number generation on platforms that do not have "/dev/urandom" (except windows)
+
+Package: libpq
+Feature: zlib
+Depends: zlib
+Architecture: x64-windows-static
+Multi-Arch: same
+Description: Use zlib
