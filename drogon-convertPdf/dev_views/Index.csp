@@ -1,0 +1,10 @@
+<%layout Layout.csp %>
+<main class="px-3">
+    <form action="/pdf/convertPdf" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="formFile" class="form-label">请上传要转换pdf的文档</label>
+      <input class="form-control" type="file" id="file" name="file">
+      <button type="submit" class="btn btn-dark">转换</button>
+    </div>
+    </form>
+</main>
