@@ -1,7 +1,7 @@
 #pragma once
 
 #include <drogon/HttpController.h>
-
+#include "../constants/PdfConverConstant.h"
 using namespace drogon;
 
 class pdf : public drogon::HttpController<pdf> {
@@ -29,7 +29,7 @@ public:
 
     static void serviceMonitor(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) {
         auto resp = HttpResponse::newHttpResponse();
-        resp->setBody("pdfService is running...");
+        resp->setBody(pdfConvertConstant::CONVERT_SERVICE_MONITOR);
         callback(resp);
     }
 

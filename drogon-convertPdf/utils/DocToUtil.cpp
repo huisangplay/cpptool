@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <cstdio>
 #include "DocToUtil.h"
+#include "../constants/PdfConverConstant.h"
 #include<string>
 
 namespace docTo {
@@ -19,7 +20,7 @@ namespace docTo {
             return;
         }
 
-        DWORD wait_result = WaitForSingleObject(pi.hProcess, 1 * 60 * 1000);
+        DWORD wait_result = WaitForSingleObject(pi.hProcess, pdfConvertConstant::PDF_CONVERT_WAITING_TIME);
 
         TerminateProcess(pi.hProcess, 0);
         if (wait_result == WAIT_TIMEOUT) { // 如果等待超时

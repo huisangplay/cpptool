@@ -1,1 +1,0 @@
-![](images/drogon-white.jpg)

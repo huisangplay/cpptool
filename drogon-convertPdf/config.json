@@ -28,9 +28,10 @@
     "max_connections": 100000,
     "max_connections_per_ip": 0,
     "log": {
-      "logfile_base_name": "",
+      "log_path": "./",
+      "logfile_base_name": "convert",
       "log_size_limit": 100000000,
-      "log_level": "DEBUG",
+      "log_level": "WARN",
       "log_format": "$request_date $method $url [$body_bytes_received] ($remote_addr - $local_addr) $status $body_bytes_sent $processing_time"
     },
     "enable_session": true,

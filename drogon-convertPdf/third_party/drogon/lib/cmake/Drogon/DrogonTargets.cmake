@@ -60,7 +60,7 @@ add_library(Drogon::Drogon STATIC IMPORTED)
 
 set_target_properties(Drogon::Drogon PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "Trantor::Trantor;\$<LINK_ONLY:shlwapi>;Jsoncpp_lib;\$<LINK_ONLY:SQLite3_lib>;\$<LINK_ONLY:ZLIB::ZLIB>"
+  INTERFACE_LINK_LIBRARIES "Trantor::Trantor;\$<LINK_ONLY:shlwapi>;Jsoncpp_lib;\$<LINK_ONLY:ZLIB::ZLIB>"
 )
 
 if(CMAKE_VERSION VERSION_LESS 2.8.12)
