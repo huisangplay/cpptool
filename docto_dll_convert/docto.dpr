@@ -10,7 +10,7 @@ uses
   MainUtils in 'MainUtils.pas',
   ResourceUtils in 'ResourceUtils.pas',
   PathUtils in 'PathUtils.pas',
-  datamodSSL in 'datamodSSL.pas' {dmSSL: TDataModule} ,
+  datamodSSL in 'datamodSSL.pas',
   ExcelUtils in 'ExcelUtils.pas',
   PowerPointUtils in 'PowerPointUtils.pas',
   Word_TLB_Constants in 'Word_TLB_Constants.pas',
@@ -19,10 +19,9 @@ uses
   VisioUtils in 'VisioUtils.pas',
   Visio_TLB in 'Visio_TLB.pas';
 
-
-function ConvertDocTo(const inputExtension: PAnsiChar;
+procedure ConvertDocTo(const inputExtension: PAnsiChar;
   const inputFile: PAnsiChar; const outputFile: PAnsiChar;
-  const outputFileExtension: PAnsiChar): PAnsiChar; stdcall;
+  const outputFileExtension: PAnsiChar); stdcall;
 var
   Converter: integer;
   paramlist: TStringlist;
@@ -44,13 +43,14 @@ begin
       VSConv := TVisioConverter.create;
       try
         begin
-          paramlist.Add(inputExtension);
+          paramlist.Add(string(inputExtension));
           paramlist.Add('-F');
-          paramlist.Add(inputFile);
+          paramlist.Add(string(inputFile));
           paramlist.Add('-O');
-          paramlist.Add(outputFile);
+          paramlist.Add(string(outputFile));
           paramlist.Add('-T');
-          paramlist.Add(outputFileExtension);
+          paramlist.Add(string(outputFileExtension));
+          paramlist.Add('-Q');
         end;
 
         CoInitialize(nil);
@@ -108,7 +108,7 @@ begin
 
     end;
   finally
-    paramlist.Free;
+    paramlist.free;
   end;
 end;
 
