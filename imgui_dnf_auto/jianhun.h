@@ -43,7 +43,8 @@ void jianhun_auto(int PL) {
         keyPress(&ip, DIK_UP, 100);
         keyPress(&ip, DIK_SPACE, 100);
         Sleep(4000 + getRandom());
-
+        keyPress(&ip, DIK_G, 50);
+        Sleep(100 + getRandom());
         keyPress(&ip, DIK_S, 50);
         Sleep(100 + getRandom());
         keyPress(&ip, DIK_SPACE, 50);

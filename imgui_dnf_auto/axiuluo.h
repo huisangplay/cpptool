@@ -18,7 +18,7 @@ void axiuluo_auto(int PL) {
     Sleep(3000);
 
     for (int i = 1; i <= count; ++i) {
-
+        std::cout<<"第"<<i<<"次进图..."<<std::endl;
         //buff
         keyPress(&ip, DIK_RIGHT, 100);
         keyPress(&ip, DIK_RIGHT, 100);
@@ -28,19 +28,19 @@ void axiuluo_auto(int PL) {
 
         //清第一个房间怪
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 1500);
-        keyPress(&ip, DIK_S, 100);
-        Sleep(500 + getRandom());
+        keyPress(&ip, DIK_RIGHT, 2200);
+        keyPress(&ip, DIK_R, 100);
+        Sleep(2000 + getRandom());
 
         //清第二个房间怪
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 1800);
+        keyPress(&ip, DIK_RIGHT, 2500);
         keyPress(&ip, DIK_H, 500);
         Sleep(1000 + getRandom());
 
         //清第BOSS
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 2000);
+        keyPress(&ip, DIK_RIGHT, 2500);
         keyPress(&ip, DIK_T, 100);
         Sleep(3000 + getRandom());
 //        keyPress(&ip, DIK_Y,100);

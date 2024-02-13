@@ -1,6 +1,3 @@
-//
-// Created by ZHOU on 2023/6/23.
-//
 #include <Windows.h>
 #include<iostream>
 #include "Application.h"
@@ -16,7 +13,14 @@
 #include"AllRole.h"
 
 static int naimaPL = 188;
-static int buttonLen = 500;
+static int miusiPL = 188;
+static int jianhunPL = 188;
+static int kuangzhanPL = 188;
+static int jianyingPL = 188;
+static int axiuluoPL = 188;
+static int jiandiPL = 188;
+static int lvrenPL = 188;
+static int renyingPL = 188;
 static int PLInputLen = 50;
 
 
@@ -70,21 +74,26 @@ namespace MyApp {
             ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
         }
 
-        if (ImGui::BeginMenuBar())
-        {
-            if (ImGui::BeginMenu("Options"))
-            {
+        if (ImGui::BeginMenuBar()) {
+            if (ImGui::BeginMenu("Options")) {
                 // Disabling fullscreen would allow the window to be moved to the front of other windows,
                 // which we can't undo at the moment without finer window depth/z control.
                 ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen);
                 ImGui::MenuItem("Padding", NULL, &opt_padding);
                 ImGui::Separator();
 
-                if (ImGui::MenuItem("Flag: NoSplit",                "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) != 0))                 { dockspace_flags ^= ImGuiDockNodeFlags_NoSplit; }
-                if (ImGui::MenuItem("Flag: NoResize",               "", (dockspace_flags & ImGuiDockNodeFlags_NoResize) != 0))                { dockspace_flags ^= ImGuiDockNodeFlags_NoResize; }
-                if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0))  { dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode; }
-                if (ImGui::MenuItem("Flag: AutoHideTabBar",         "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0))          { dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar; }
-                if (ImGui::MenuItem("Flag: PassthruCentralNode",    "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0, opt_fullscreen)) { dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode; }
+                if (ImGui::MenuItem("Flag: NoSplit", "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) !=
+                                                         0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoSplit; }
+                if (ImGui::MenuItem("Flag: NoResize", "", (dockspace_flags & ImGuiDockNodeFlags_NoResize) !=
+                                                          0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoResize; }
+                if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "",
+                                    (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) !=
+                                    0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode; }
+                if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) !=
+                                                                0)) { dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar; }
+                if (ImGui::MenuItem("Flag: PassthruCentralNode", "",
+                                    (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0,
+                                    opt_fullscreen)) { dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode; }
                 ImGui::Separator();
                 ImGui::EndMenu();
             }
@@ -125,86 +134,97 @@ namespace MyApp {
             allRole_auto();
         }
 
-        ImGui::PushItemWidth(buttonLen);
+        //奶妈
         if (ImGui::Button(u8"奶妈")) {
             naima_auto(naimaPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
+        ImGui::PushID(0);
         ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+
+        //缪斯
         if (ImGui::Button(u8"缪斯")) {
-            miusi_auto(naimaPL);
+            miusi_auto(miusiPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(1);
+        ImGui::InputInt("疲劳值", &miusiPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //剑魂
         if (ImGui::Button(u8"剑魂")) {
-            jianhun_auto(naimaPL);
+            jianhun_auto(jianhunPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(2);
+        ImGui::InputInt("疲劳值", &jianhunPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //狂战
         if (ImGui::Button(u8"狂战")) {
-            kuangzhan_auto(naimaPL);
+            kuangzhan_auto(kuangzhanPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(3);
+        ImGui::InputInt("疲劳值", &kuangzhanPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //剑影
         if (ImGui::Button(u8"剑影")) {
-            jianying_auto(naimaPL);
+            jianying_auto(jianyingPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(4);
+        ImGui::InputInt("疲劳值", &jianyingPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //修罗
         if (ImGui::Button(u8"修罗")) {
-            axiuluo_auto(naimaPL);
+            axiuluo_auto(axiuluoPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(5);
+        ImGui::InputInt("疲劳值", &axiuluoPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //剑帝
         if (ImGui::Button(u8"剑帝")) {
-            jiandi_auto(naimaPL);
+            jiandi_auto(jiandiPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(6);
+        ImGui::InputInt("疲劳值", &jiandiPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //旅人
         if (ImGui::Button(u8"旅人")) {
-            lvren_auto(naimaPL);
+            lvren_auto(lvrenPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(7);
+        ImGui::InputInt("疲劳值", &lvrenPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
 
-        ImGui::PushItemWidth(buttonLen);
+        //刃影
         if (ImGui::Button(u8"刃影")) {
-            renying_auto(naimaPL);
+            renying_auto(renyingPL);
         }
         ImGui::SameLine();
-        // 设置输入框的宽度为200
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::InputInt("疲劳值", &naimaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PushID(8);
+        ImGui::InputInt("疲劳值", &renyingPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
+
         ImGui::End();
         ImGui::End();
     }

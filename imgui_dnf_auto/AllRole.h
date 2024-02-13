@@ -50,7 +50,6 @@ void allRole_auto() {
 
     // 遍历 "Sequence" 对象的键值对
     for (const auto& pair : orderedSequence) {
-
         int roleMapKey = pair.first;
         const nlohmann::json& value = pair.second;
 
@@ -61,7 +60,7 @@ void allRole_auto() {
 
         if(role=="NULL"||pl==0){
             keyPress(&ip, DIK_RIGHT, 50 + getRandom());
-            Sleep(500 + getRandom(100));
+            Sleep(1000 + getRandom(100));
             continue;
         }
 
@@ -114,7 +113,8 @@ void allRole_auto() {
         MouseClickLeft(&buffer);
         Sleep(1500 + getRandom(100));
 
-        keyPress(&ip, DIK_RIGHT, 50 + getRandom());
+        keyPress(&ip, DIK_RIGHT, 50+ getRandom());
+        Sleep(500 + getRandom(100));
 
     }
 }
