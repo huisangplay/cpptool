@@ -8,6 +8,7 @@
 #include <d3d11.h>
 #include <tchar.h>
 #include "Application.h"
+#include "imgui/imgui_theme.h"
 // Data
 static ID3D11Device*            g_pd3dDevice = nullptr;
 static ID3D11DeviceContext*     g_pd3dDeviceContext = nullptr;
@@ -63,11 +64,19 @@ int main(int, char**)
     //io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports; // FIXME-DPI: Experimental.
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
-
-    // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+//    ImGui::StyleColorsClassic();
+//    ImGuiTheme::ImGuiTweakedTheme imGuiTweakedTheme;
+//    ImGuiTheme::ImGuiThemeTweaks imGuiThemeTweaks;
+//    imGuiTweakedTheme.Theme=ImGuiTheme::ImGuiTheme_Cherry;
+//
+//    ImGuiStyle myStyle= ImGuiTheme::TweakedThemeThemeToStyle(imGuiTweakedTheme);
+//
+//    //ImGui::StyleColorsLight();
+//
+//    // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
+//    style=myStyle;
+
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
         style.WindowRounding = 0.0f;

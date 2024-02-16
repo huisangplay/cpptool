@@ -22,6 +22,8 @@
 #include"lvren.h"
 #include <fstream>
 #include "json.hpp"
+#include "naiba.h"
+
 extern int SWITCH_ROLE_CURSOR_X = 1046;
 extern int SWITCH_ROLE_CURSOR_Y = 733;
 using json = nlohmann::json;
@@ -102,6 +104,9 @@ void allRole_auto() {
         } else if (role == "刃影") {
             std::cout << "开始刃影自动刷深渊" << std::endl;
             renying_auto(pl);
+        }else if (role == "奶爸") {
+            std::cout << "开始奶爸自动刷深渊" << std::endl;
+            naiba_auto(pl);
         }
         keyPress(&ip, DIK_ESCAPE, 50 + getRandom());
         Sleep(1000 + getRandom(100));

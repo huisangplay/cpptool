@@ -1,6 +1,7 @@
+
+#include"Application.h"
 #include <Windows.h>
 #include<iostream>
-#include "Application.h"
 #include"naima.h"
 #include"miusi.h"
 #include"jianhun.h"
@@ -11,6 +12,7 @@
 #include"renying.h"
 #include"lvren.h"
 #include"AllRole.h"
+#include "naiba.h"
 
 static int naimaPL = 188;
 static int miusiPL = 188;
@@ -21,12 +23,13 @@ static int axiuluoPL = 188;
 static int jiandiPL = 188;
 static int lvrenPL = 188;
 static int renyingPL = 188;
+static int naibaPL = 188;
 static int PLInputLen = 50;
-
+static int changed = false;
+static ImGuiTheme::ImGuiTweakedTheme imGuiTweakedTheme;
 
 namespace MyApp {
     void RenderUI() {
-
         static bool opt_fullscreen = true;
         static bool opt_padding = false;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
@@ -102,6 +105,13 @@ namespace MyApp {
             ImGui::EndMenuBar();
         }
 
+        //-------------------------------
+        ImGui::Begin(u8"主题设置");
+        if (ImGuiTheme::ShowThemeTweakGui(&imGuiTweakedTheme)) {
+            ApplyTweakedTheme(imGuiTweakedTheme);
+        }
+        ImGui::End();
+        //---------------------------
 
         ImGui::Begin("DNF自动刷深渊脚本");
 
@@ -153,6 +163,16 @@ namespace MyApp {
         ImGui::SetNextItemWidth(PLInputLen);
         ImGui::PushID(1);
         ImGui::InputInt("疲劳值", &miusiPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
+        ImGui::PopID();
+
+        //奶爸
+        if (ImGui::Button(u8"奶爸")) {
+            naiba_auto(naibaPL);
+        }
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(PLInputLen);
+        ImGui::PushID(8);
+        ImGui::InputInt("疲劳值", &naibaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
         ImGui::PopID();
 
         //剑魂

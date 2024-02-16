@@ -21,6 +21,7 @@ add_executable(${PROJECT_NAME} main.cpp Application.cpp Application.h
         renying.h
         axiuluo.h
         AllRole.h
+        naiba.h
 )
 
 target_link_libraries(${PROJECT_NAME} d3d11.lib)
