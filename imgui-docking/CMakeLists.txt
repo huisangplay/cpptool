@@ -4,6 +4,9 @@ project(imgui)
 set(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_FLAGS_RELEASE  "$ENV{CXXFLAGS} /MD")
 SET(CMAKE_CXX_FLAGS_DEBUG   "$ENV{CXXFLAGS} /MD")
+#msvc编译时防止utf8解析成gbk导致页面显示乱码
+add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 link_directories(${PROJECT_SOURCE_DIR}/libs)
 add_executable(${PROJECT_NAME} main.cpp Application.cpp Application.h)
 
