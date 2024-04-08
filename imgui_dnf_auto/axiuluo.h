@@ -23,32 +23,30 @@ void axiuluo_auto(int PL) {
         keyPress(&ip, DIK_RIGHT, 100);
         keyPress(&ip, DIK_RIGHT, 100);
         keyPress(&ip, DIK_SPACE, 100);
-
+        Sleep(500 + getRandom());
+        keyPress(&ip, DIK_Y, 100);
         Sleep(1300 + getRandom());
 
         //清第一个房间怪
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 2200);
-        keyPress(&ip, DIK_R, 100);
+        keyPress(&ip, DIK_RIGHT, 1400);
+        keyPress(&ip, DIK_H, 100);
         Sleep(2000 + getRandom());
 
         //清第二个房间怪
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 2500);
-        keyPress(&ip, DIK_H, 500);
+        keyPress(&ip, DIK_RIGHT, 1300);
+        keyPress(&ip, DIK_LALT, 500);
         Sleep(1000 + getRandom());
 
         //清第BOSS
         keyPress(&ip, DIK_RIGHT, 50);
-        keyPress(&ip, DIK_RIGHT, 2500);
+        keyPress(&ip, DIK_RIGHT, 1300);
         keyPress(&ip, DIK_T, 100);
-        Sleep(3000 + getRandom());
+        Sleep(5000 + getRandom());
+
 //        keyPress(&ip, DIK_Y,100);
 //        Sleep(5000+getRandom());
-        keyPress(&ip, DIK_S, 200);
-        Sleep(1000 + getRandom());
-        keyPress(&ip, DIK_SPACE, 200);
-        Sleep(3000 + getRandom());
         keyPress(&ip, DIK_GRAVE, 100);
         Sleep(500 + getRandom());
         keyPress(&ip, DIK_ESCAPE, 100);

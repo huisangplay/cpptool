@@ -26,10 +26,12 @@ static int renyingPL = 188;
 static int naibaPL = 188;
 static int PLInputLen = 50;
 static int changed = false;
+static int roleIndex=0;
 static ImGuiTheme::ImGuiTweakedTheme imGuiTweakedTheme;
 
 namespace MyApp {
     void RenderUI() {
+
         static bool opt_fullscreen = true;
         static bool opt_padding = false;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
@@ -141,8 +143,11 @@ namespace MyApp {
 
 
         if (ImGui::Button(u8"全角色自动刷深渊")) {
-            allRole_auto();
+            allRole_auto(roleIndex);
         }
+        ImGui::SameLine();
+        ImGui::InputInt("start", &roleIndex);
+
 
         //奶妈
         if (ImGui::Button(u8"奶妈")) {
@@ -171,7 +176,7 @@ namespace MyApp {
         }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(PLInputLen);
-        ImGui::PushID(8);
+        ImGui::PushID(9);
         ImGui::InputInt("疲劳值", &naibaPL, 0, 0, ImGuiInputTextFlags_CharsDecimal);
         ImGui::PopID();
 

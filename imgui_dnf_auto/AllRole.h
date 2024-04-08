@@ -24,11 +24,11 @@
 #include "json.hpp"
 #include "naiba.h"
 
-extern int SWITCH_ROLE_CURSOR_X = 1046;
-extern int SWITCH_ROLE_CURSOR_Y = 733;
+extern int  SWITCH_ROLE_CURSOR_X = 1370;
+extern int SWITCH_ROLE_CURSOR_Y = 945;
 using json = nlohmann::json;
 
-void allRole_auto() {
+void allRole_auto(int roleIndex) {
     Sleep(3000);
     INPUT buffer;
     MouseSetup(&buffer);
@@ -53,6 +53,7 @@ void allRole_auto() {
     // 遍历 "Sequence" 对象的键值对
     for (const auto& pair : orderedSequence) {
         int roleMapKey = pair.first;
+        if(roleMapKey<roleIndex) continue;
         const nlohmann::json& value = pair.second;
 
         std::string role = value["role"];
@@ -69,8 +70,29 @@ void allRole_auto() {
         keyPress(&ip, DIK_SPACE, 50 + getRandom());
         Sleep(2000 + getRandom(100));
 
+        // 领深渊票
+        SetCursorPos(1664, 1258);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1500 + getRandom(100));
+
+        SetCursorPos(1347, 575);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1500 + getRandom(100));
+
+        keyPress(&ip, DIK_ESCAPE, 100 + getRandom(500));
+
+
         keyPress(&ip, DIK_RIGHT, 1500 + getRandom(500));
-        keyPress(&ip, DIK_SPACE, 50 + getRandom());
+
+        //选择深渊地图
+        SetCursorPos(1066, 737);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
         Sleep(1000 + getRandom(100));
 
         keyPress(&ip, DIK_RIGHT, 2000 + getRandom(500));

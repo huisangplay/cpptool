@@ -50,13 +50,9 @@ void jianying_auto(int PL) {
         Sleep(1000 + getRandom());
         Sleep(500 + getRandom());
         keyPress(&ip, DIK_G, 100);
-        Sleep(3000 + getRandom());
+        Sleep(4000 + getRandom());
 //        keyPress(&ip, DIK_Y,100);
 //        Sleep(5000+getRandom());
-        keyPress(&ip, DIK_S, 200);
-        Sleep(1000 + getRandom());
-        keyPress(&ip, DIK_SPACE, 200);
-        Sleep(3000 + getRandom());
         keyPress(&ip, DIK_GRAVE, 100);
         Sleep(500 + getRandom());
         keyPress(&ip, DIK_ESCAPE, 100);

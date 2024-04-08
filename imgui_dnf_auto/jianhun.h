@@ -42,13 +42,9 @@ void jianhun_auto(int PL) {
         Sleep(300 + getRandom());
         keyPress(&ip, DIK_UP, 100);
         keyPress(&ip, DIK_SPACE, 100);
-        Sleep(4000 + getRandom());
+        Sleep(5000 + getRandom());
         keyPress(&ip, DIK_G, 50);
         Sleep(100 + getRandom());
-        keyPress(&ip, DIK_S, 50);
-        Sleep(100 + getRandom());
-        keyPress(&ip, DIK_SPACE, 50);
-        Sleep(1000 + getRandom());
         keyPress(&ip, DIK_GRAVE, 100);
         Sleep(500 + getRandom());
         keyPress(&ip, DIK_ESCAPE, 100);

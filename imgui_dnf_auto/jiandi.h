@@ -26,27 +26,25 @@ void jiandi_auto(int PL) {
         Sleep(1300 + getRandom());
 
         //清第一个房间怪
-        keepRun(&ip,1300);
+        keepRun(&ip,1400);
         keyPress(&ip, DIK_D, 100);
         Sleep(500 + getRandom());
 
         //清第二个房间怪
-        keepRun(&ip,1500);
+        keepRun(&ip,1400);
         keyPress(&ip, DIK_G, 500);
         Sleep(1000 + getRandom());
 
         //清第BOSS
-        keepRun(&ip,900);
+        keepRun(&ip,1000);
+        keyPress(&ip, DIK_T, 100);
+        Sleep(500 + getRandom());
         keyPress(&ip, DIK_LCONTROL, 100);
         Sleep(4000 + getRandom());
         keyPress(&ip, DIK_Q, 200);
-        Sleep(2000 + getRandom());
+        Sleep(3000 + getRandom());
 //        keyPress(&ip, DIK_Y,100);
 //        Sleep(5000+getRandom());
-        keyPress(&ip, DIK_S, 200);
-        Sleep(1000 + getRandom());
-        keyPress(&ip, DIK_SPACE, 200);
-        Sleep(3000 + getRandom());
         keyPress(&ip, DIK_GRAVE, 100);
         Sleep(500 + getRandom());
         keyPress(&ip, DIK_ESCAPE, 100);
