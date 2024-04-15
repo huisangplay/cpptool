@@ -1,28 +1,28 @@
-//
-// Created by ZHOU on 2024/2/10.
-//
+    //
+    // Created by ZHOU on 2024/2/10.
+    //
 
-#ifndef IMGUI_ALLROLE_H
-#define IMGUI_ALLROLE_H
+    #ifndef IMGUI_ALLROLE_H
+    #define IMGUI_ALLROLE_H
 
-#include<map>
-#include"VirtualAtuoUtil.h"
-#include <cmath>
-#include<iostream>
-#include <unordered_map>
-#include <functional>
-#include"naima.h"
-#include"miusi.h"
-#include"jianhun.h"
-#include "kuangzhan.h"
-#include"jianying.h"
-#include"axiuluo.h"
-#include"jiandi.h"
-#include"renying.h"
-#include"lvren.h"
-#include <fstream>
-#include "json.hpp"
-#include "naiba.h"
+    #include<map>
+    #include"VirtualAtuoUtil.h"
+    #include <cmath>
+    #include<iostream>
+    #include <unordered_map>
+    #include <functional>
+    #include"naima.h"
+    #include"miusi.h"
+    #include"jianhun.h"
+    #include "kuangzhan.h"
+    #include"jianying.h"
+    #include"axiuluo.h"
+    #include"jiandi.h"
+    #include"renying.h"
+    #include"lvren.h"
+    #include <fstream>
+    #include "json.hpp"
+    #include "naiba.h"
 
 extern int  SWITCH_ROLE_CURSOR_X = 1370;
 extern int SWITCH_ROLE_CURSOR_Y = 945;
@@ -70,7 +70,7 @@ void allRole_auto(int roleIndex) {
         keyPress(&ip, DIK_SPACE, 50 + getRandom());
         Sleep(2000 + getRandom(100));
 
-        // 领深渊票
+    // 领深渊票
         SetCursorPos(1664, 1258);
         Sleep(1000 + getRandom(100));
 
@@ -88,7 +88,7 @@ void allRole_auto(int roleIndex) {
 
         keyPress(&ip, DIK_RIGHT, 1500 + getRandom(500));
 
-        //选择深渊地图
+    //选择深渊地图
         SetCursorPos(1066, 737);
         Sleep(1000 + getRandom(100));
 
@@ -130,6 +130,49 @@ void allRole_auto(int roleIndex) {
             std::cout << "开始奶爸自动刷深渊" << std::endl;
             naiba_auto(pl);
         }
+
+        
+        //领取每日奖励
+        SetCursorPos(1664, 1254);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+        SetCursorPos(1344, 890);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+        SetCursorPos(1347, 793);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+        SetCursorPos(1346, 717);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+        SetCursorPos(1346, 642);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+        SetCursorPos(1337, 574);
+        Sleep(1000 + getRandom(100));
+
+        MouseClickLeft(&buffer);
+        Sleep(1000 + getRandom(100));
+
+
+        keyPress(&ip, DIK_ESCAPE, 50 + getRandom());
+        Sleep(1000 + getRandom(100));
+        
         keyPress(&ip, DIK_ESCAPE, 50 + getRandom());
         Sleep(1000 + getRandom(100));
 
@@ -146,4 +189,4 @@ void allRole_auto(int roleIndex) {
     }
 }
 
-#endif //IMGUI_ALLROLE_H
+    #endif //IMGUI_ALLROLE_H
