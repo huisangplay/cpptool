@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28.0-msvc1)
+cmake_minimum_required(VERSION 3.28)
 project(imgui)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -7,6 +7,15 @@ SET(CMAKE_CXX_FLAGS_DEBUG   "$ENV{CXXFLAGS} /MD")
 #msvc编译时防止utf8解析成gbk导致页面显示乱码
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+
+# 设置源文件和目标文件的路径
+set(source_file "${CMAKE_SOURCE_DIR}/auto_dnf_config.json")
+set(destination_file "${CMAKE_SOURCE_DIR}/build/Release/auto_dnf_config.json")
+
+# 调用 configure_file 命令复制文件
+configure_file(${source_file} ${destination_file} COPYONLY)
+
 link_directories(${PROJECT_SOURCE_DIR}/libs)
 add_executable(${PROJECT_NAME} main.cpp Application.cpp Application.h
         naima.h
