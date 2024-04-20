@@ -14,7 +14,7 @@ void naiba_auto(int PL) {
     MouseSetup(&buffer);
     INPUT ip;
     KeyBoardSetup(&ip);
-    int count = static_cast<int>(std::ceil(static_cast<double>(PL) / 8));
+    int count = static_cast<int>(std::ceil(static_cast<double>(PL) / 12));
     //脚本主要逻辑
     Sleep(3000);
 
