@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(imgui)
+project(dnf_auto)
 
 set(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_FLAGS_RELEASE  "$ENV{CXXFLAGS} /MD")
@@ -31,6 +31,7 @@ add_executable(${PROJECT_NAME} main.cpp Application.cpp Application.h
         axiuluo.h
         AllRole.h
         naiba.h
+        utils/windowsutil.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} d3d11.lib)

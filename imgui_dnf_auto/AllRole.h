@@ -23,12 +23,17 @@
     #include <fstream>
     #include "json.hpp"
     #include "naiba.h"
-
+    #include"utils/windowsutil.h"
 extern int  SWITCH_ROLE_CURSOR_X = 1370;
 extern int SWITCH_ROLE_CURSOR_Y = 945;
 using json = nlohmann::json;
 
 void allRole_auto(int roleIndex) {
+
+    //设置dnf为活动窗口
+    const WCHAR* targetWindowName = L"地下城与勇士：创新世纪";
+    SetActiveWindowByName(targetWindowName);
+
     Sleep(3000);
     INPUT buffer;
     MouseSetup(&buffer);

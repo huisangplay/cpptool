@@ -27,18 +27,18 @@ void jianhun_auto(int PL) {
         Sleep(500 + getRandom());
 
         //清第一个房间怪
-        keepRun(&ip,2200);
+        keepRun(&ip,2100);
         keyPress(&ip, DIK_Q, 100);
         keyPress(&ip, DIK_Q, 100);
         Sleep(1000 + getRandom());
 
         //清第二个房间怪
-        keepRun(&ip,1300);
+        keepRun(&ip,1200);
         keyPress(&ip, DIK_R, 100);
         Sleep(500 + getRandom());
 
         //清第BOSS
-        keepRun(&ip,2000);
+        keepRun(&ip,1900);
         Sleep(300 + getRandom());
         keyPress(&ip, DIK_UP, 100);
         keyPress(&ip, DIK_SPACE, 100);

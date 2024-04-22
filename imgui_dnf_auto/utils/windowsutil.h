@@ -1,4 +1,2 @@
-#include <string>
-#include <shlobj.h>
-using namespace std;
-string OnSigBtnSelectInstallDir();
+#define UNICODE
+void SetActiveWindowByName(const WCHAR* windowName);

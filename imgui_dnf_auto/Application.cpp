@@ -31,7 +31,6 @@ static ImGuiTheme::ImGuiTweakedTheme imGuiTweakedTheme;
 
 namespace MyApp {
     void RenderUI() {
-
         static bool opt_fullscreen = true;
         static bool opt_padding = false;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
