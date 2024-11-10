@@ -1,0 +1,1 @@
+g++ -static -lws2_32 main.cpp

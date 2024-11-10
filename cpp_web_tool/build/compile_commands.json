@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Administrator/Desktop/cpp_web_tool/build",
+  "command": "C:\\Tool\\Cpp\\mingw64\\bin\\c++.exe -g -o CMakeFiles\\cpp_web_tool.dir\\main.cpp.obj -c C:\\Users\\Administrator\\Desktop\\cpp_web_tool\\main.cpp",
+  "file": "C:\\Users\\Administrator\\Desktop\\cpp_web_tool\\main.cpp",
+  "output": "CMakeFiles\\cpp_web_tool.dir\\main.cpp.obj"
+}
+]

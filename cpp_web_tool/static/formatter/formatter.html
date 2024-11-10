@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON/XML格式化工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="xml-formatter-singleton.js"></script>
+</head>
+
+<body>
+    <div class="container" style="padding: 20px;">
+        <h2>JSON/XML格式化工具</h2>
+        <button onclick="formatJson()" class="btn btn-dark">格式化JSON</button>
+        <button onclick="compressJson()" class="btn btn-dark">压缩JSON</button>
+        <button onclick="formatXml()" class="btn btn-dark">格式化XML</button>
+        <button onclick="compressXml()" class="btn btn-dark">压缩XML</button>
+        <textarea id="inputArea" placeholder="输入xml或json" class="form-control" style="height: 75vh;margin-top: 10px;"></textarea>
+        <input class="form-control" id="fileInput" type="file" accept=".json,.xml" style="margin-top: 20px;">
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('inputArea').value = e.target.result;
+            };
+            reader.readAsText(file);
+        });
+
+        function formatJson() {
+            try {
+                const input = document.getElementById('inputArea').value;
+                const json = JSON.parse(input);
+                document.getElementById('inputArea').value = JSON.stringify(json, null, 4);
+            } catch (e) {
+                alert('Invalid JSON');
+            }
+        }
+
+        function compressJson() {
+            try {
+                const input = document.getElementById('inputArea').value;
+                const json = JSON.parse(input);
+                document.getElementById('inputArea').value = JSON.stringify(json);
+            } catch (e) {
+                alert('Invalid JSON');
+            }
+        }
+
+        function formatXml() {
+            try {
+                const input = document.getElementById('inputArea').value;
+                document.getElementById('inputArea').value = xmlFormatter(input);
+                
+            } catch (e) {
+                alert('Invalid XML');
+            }
+        }
+
+        function compressXml() {
+            try {
+                const input = document.getElementById('inputArea').value;
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(input, 'application/xml');
+                const serializer = new XMLSerializer();
+                document.getElementById('inputArea').value = serializer.serializeToString(xmlDoc).replace(/\s+/g, ' ').trim();
+            } catch (e) {
+                alert('Invalid XML');
+            }
+        }
+    </script>
+</body>
+
+</html>
